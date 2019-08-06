@@ -1,21 +1,31 @@
 package org.ms3.lcstracker.players;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+/*
+ * These methods need to return response entities
+ * to communicate with the HTTP request correctly
+ * therefore I should out-source the actual functionality to 
+ * the PlayerService class
+ */
+
 
 @RestController
 @RequestMapping("/players")
 public class PlayerController {
 	
 	@GetMapping()
-	public Player[] getPlayers(String teamTag) {
+	public List<Player> getPlayers(String teamTag) {
 		//get all players on teamTag team
 		return null;
 	}
 	
 	@PostMapping()
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void postPlayers(Player[] pArray) {
+	public void postPlayers(List<Player> pArray) {
 		//Pass these players into PlayerController
 	}
 	
