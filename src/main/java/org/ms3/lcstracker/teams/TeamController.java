@@ -66,7 +66,7 @@ public class TeamController {
             losses = from.getLosses();
 
         Team toReturn = new Team(name, teamTag, region, wins, losses);
-        toReturn.setId(to.getId());
+        toReturn.setId(from.getId());
         return toReturn;
 
 
