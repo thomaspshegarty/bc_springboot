@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 public class PlayerController {
 
 	@Autowired
-	private PlayerRepository pr;
+	private PlayerRepoService prs;
+
+	PlayerController(PlayerRepoService prs) { this.prs = prs; }
 
 	@RequestMapping("/")
 	public String basicGreeting(){
@@ -21,59 +23,31 @@ public class PlayerController {
 
 	@GetMapping()
 	public List<Player> getPlayers(@RequestBody String teamTag) {
-		if (teamTag == "") {
-			return pr.findAll();
-		} else {
-			return pr.findByTag(teamTag);
-		}
+		return prs.getPlayers(teamTag);
 	}
 	
 	@PostMapping()
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public void postPlayers(@RequestBody List<Player> pArray) {
-		for (Player p: pArray) {
-			pr.save(p);
-		}
+		prs.postPlayers(pArray);
 	}
 	
 	@GetMapping("/{pId}")
 	public Player getPlayer(@PathVariable long pId) {
-		return pr.findById(pId).orElse(null);
+		return prs.getPlayer(pId);
 	}
 	
 	@PutMapping("/{pId}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void updatePlayer(long pId, Player p) {
-		Player p1 = (Player) pr.findById(pId).orElse(null);
-		if (p1 == null){
-			//fail here, the player doesn't exist in the database
-		} else {
-			p = updateEach(p,p1);
-			pr.deleteById(pId);
-			pr.save(p);
-		}
+	public void updatePlayer(@PathVariable long pId, @RequestBody Player p) {
+		prs.updatePlayer(pId,p);
 	}
 	
 	@DeleteMapping("/{pId}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public void deletePlayer(@PathVariable long pId) {
-		pr.deleteById(pId);
+		prs.deletePlayer(pId);
 	}
 	
-	private Player updateEach(Player to, Player from) {
-		String ign, team, tag, role;
-		if ((ign = to.getIgn()) == null)
-			ign = from.getIgn();
-		if ((team = to.getTeam()) == null)
-			team = from.getTeam();
-		if ((tag = to.getTag()) == null)
-			tag = from.getTag();
-		if ((role = to.getRole()) == null)
-			role = from.getRole();
 
-		Player toReturn = new Player(ign, team, tag, role);
-		toReturn.setId(from.getId());
-		return toReturn;
-
-	}
 }
