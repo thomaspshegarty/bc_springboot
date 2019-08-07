@@ -13,7 +13,7 @@ public class TeamPreloader {
     @Bean
     CommandLineRunner testDatabase(TeamRepository tr) {
         return args -> {
-            Team t1 = new Team("Team Solo Mid", "TSM", "NA", 10, 5);
+            Team t1 = new Team("Team Solo Mid", "TSM", "NA", 10, 7);
             Team t2 = new Team("G2 Esports", "G2", "EU", 13, 4);
 
             log.info("Preloading " + tr.save(t1));
