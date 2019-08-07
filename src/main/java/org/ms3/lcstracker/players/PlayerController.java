@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/players")
 public class PlayerController {
-	
+
+	@RequestMapping("/")
+	public String basicGreeting(){
+		return "Welcome to the players page.";
+	}
+
 	@GetMapping()
 	public List<Player> getPlayers(String teamTag) {
 		//get all players on teamTag team
