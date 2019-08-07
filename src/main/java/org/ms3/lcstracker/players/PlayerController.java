@@ -5,6 +5,7 @@ import java.util.List;
 import org.ms3.lcstracker.teams.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,8 +23,8 @@ public class PlayerController {
 	}
 
 	@GetMapping()
-	public List<Player> getPlayers(@RequestBody String teamTag) {
-		return prs.getPlayers(teamTag);
+	public ResponseEntity<List<Player>> getPlayers(@RequestBody String teamTag) {
+		return new ResponseEntity<List<Player>>(prs.getPlayers(teamTag),HttpStatus.OK);
 	}
 	
 	@PostMapping()
@@ -33,8 +34,8 @@ public class PlayerController {
 	}
 	
 	@GetMapping("/{pId}")
-	public Player getPlayer(@PathVariable long pId) {
-		return prs.getPlayer(pId);
+	public ResponseEntity<Player> getPlayer(@PathVariable long pId) {
+		return new ResponseEntity<>(prs.getPlayer(pId),HttpStatus.OK);
 	}
 	
 	@PutMapping("/{pId}")
