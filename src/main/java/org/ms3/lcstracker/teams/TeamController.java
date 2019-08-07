@@ -1,11 +1,10 @@
 package org.ms3.lcstracker.teams;
 
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 
 /*
  * These methods need to return response entities
@@ -14,41 +13,69 @@ import org.springframework.http.HttpStatus;
  * the TeamService class
  */
 
-@RestController
+/*@RestController
 @RequestMapping(value="/teams")
 public class TeamController {
 	
 	@Autowired
-	private TeamService ts;
+	private TeamRepository tr;
+	TeamController(TeamRepository tr) {
+		this.tr = tr;
+	}
 
 	@PostMapping()
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public void addTeams(List<Team> tArray) {
-		//add teams to collection
+		for (Team t : tArray) {
+			tr.save(t);
+		}
 	}
 	
 	@GetMapping()
 	public List<Team> getTeams(String region) {
-		//return teams from region
-		return null;
+		return tr.findByRegion(region);
 	}
 	
 	@GetMapping("/{tId}")
-	public Team getTeam(int tId) {
-		//return team by id
-		return null;
+	public Team getTeam(Long tId) {
+		return tr.findOne(tId);
 	}
 	
 	@PutMapping("/{tId}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void updateTeam(int tId, Team t) {
-		//update tId with info in t
+	public void updateTeam(Long tId, Team t) {
+		Team t1 = tr.findOne(tId);
+		t = updateEach(t,t1);
+		tr.delete(tId);
+		tr.save(t);
 	}
 	
-	@DeleteMapping("/{tId")
+	@DeleteMapping("/{tId}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void deleteTeam(int tId) {
-		//delete team tId
+	public void deleteTeam(Long tId) {
+		tr.delete(tId);
 	}
-	
+
+	private Team updateEach(Team to, Team from) {
+		String name, region, teamTag;
+		int wins, losses;
+		if((name = to.getName()) == null)
+			name = from.getName();
+		if((region = to.getRegion()) == null)
+			region = from.getRegion();
+		if ((teamTag = to.getTag()) == null)
+			teamTag = from.getTag();
+		if ((wins = to.getWins()) == -1)
+			wins = from.getWins();
+		if ((losses = to.getLosses()) == -1)
+			losses = from.getLosses();
+
+		Team toReturn = new Team(name, teamTag, region, wins, losses);
+		toReturn.setId(to.getId());
+		return toReturn;
+
+
+	}
+
 }
+*/
