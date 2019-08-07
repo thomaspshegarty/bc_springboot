@@ -1,43 +1,33 @@
 package org.ms3.lcstracker.players;
 
-//import javax.persistence.*;
 
-//@Entity
+import lombok.Data;
+import javax.persistence.*;
+
+@Entity
+@Data
+@Table(name="players")
 public class Player {
 	
-	//@Id
-	//@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	@Column
 	private String ign;
+	@Column
 	private String team;
-	private String teamTag;
+	@Column
+	private String tag;
+	@Column
 	private String role;
-	
-	public Player(String ign, String team, String teamTag, String role) {
+
+	Player () {}
+
+	public Player(String ign, String team, String tag, String role) {
 		this.ign = ign;
 		this.team = team;
-		this.teamTag = teamTag;
+		this.tag = tag;
 		this.role = role;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public String getIgn() {
-		return ign;
-	}
-	
-	public String getTeam() {
-		return team;
-	}
-	
-	public String getTeamTag() {
-		return teamTag;
-	}
-	
-	public String getRole() {
-		return role;
 	}
 
 }
