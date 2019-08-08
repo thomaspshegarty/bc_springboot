@@ -19,9 +19,9 @@ public class Team {
 	@Column
 	private String region;
 	@Column
-	private int wins;
+	private int wins = -1;
 	@Column
-	private int losses;
+	private int losses = -1;
 
 	Team() {}
 

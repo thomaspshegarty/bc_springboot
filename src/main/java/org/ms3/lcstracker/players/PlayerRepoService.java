@@ -38,32 +38,29 @@ public class PlayerRepoService {
     }
 
     //update one player
-    private Player updateEach(Player to, Player from) {
-        String ign, team, tag, role;
-        if ((ign = to.getIgn()) == null)
-            ign = from.getIgn();
-        if ((team = to.getTeam()) == null)
-            team = from.getTeam();
-        if ((tag = to.getTag()) == null)
-            tag = from.getTag();
-        if ((role = to.getRole()) == null)
-            role = from.getRole();
+    private Player updateEach(Player newInfo, Player oldPlayer) {
 
-        Player toReturn = new Player(ign, team, tag, role);
-        toReturn.setId(from.getId());
-        return toReturn;
+        if(newInfo.getIgn() != null) {
+            oldPlayer.setIgn(newInfo.getIgn());
+        }
+        if(newInfo.getTag() != null) {
+            oldPlayer.setTag(newInfo.getTag());
+        }
+        if(newInfo.getTeam() != null) {
+            oldPlayer.setTeam(newInfo.getTeam());
+        }
+        if(newInfo.getRole() != null) {
+            oldPlayer.setRole(newInfo.getRole());
+        }
+
+        return oldPlayer;
 
     }
 
     public void updatePlayer(long pId, Player p){
         Player p1 = (Player) pr.findById(pId).orElse(null);
-        if (p1 == null){
-            //fail here, the player doesn't exist in the database
-        } else {
-            p = updateEach(p,p1);
-            pr.deleteById(pId);
-            pr.save(p);
-        }
+        p1 = updateEach(p,p1);
+        pr.save(p1);
     }
 
     //delete one player

@@ -38,31 +38,30 @@ public class TeamRepoService {
 
     //update one team
 
-    private Team updateEach(Team to, Team from) {
-        String name, region, teamTag;
-        int wins, losses;
-        if ((name = to.getName()) == null)
-            name = from.getName();
-        if ((region = to.getRegion()) == null)
-            region = from.getRegion();
-        if ((teamTag = to.getTag()) == null)
-            teamTag = from.getTag();
-        if ((wins = to.getWins()) == -1)
-            wins = from.getWins();
-        if ((losses = to.getLosses()) == -1)
-            losses = from.getLosses();
+    private Team updateEach(Team newInfo, Team oldTeam) {
 
-        Team toReturn = new Team(name, teamTag, region, wins, losses);
-        toReturn.setId(from.getId());
-        return toReturn;
-
+        if(newInfo.getName() != null) {
+            oldTeam.setName(newInfo.getName());
+        }
+        if(newInfo.getTag() != null) {
+            oldTeam.setTag(newInfo.getTag());
+        }
+        if(newInfo.getRegion() != null) {
+            oldTeam.setRegion(newInfo.getRegion());
+        }
+        if(newInfo.getWins() != -1) {
+            oldTeam.setWins(newInfo.getWins());
+        }
+        if(newInfo.getLosses() != -1){
+            oldTeam.setLosses(newInfo.getLosses());
+        }
+        return oldTeam;
     }
 
-    public void updateTeam(long tId, Team t) {
-        Team t1 = (Team) tr.findById(tId).orElse(null);
-        t = updateEach(t, t1);
-        tr.deleteById(tId);
-        tr.save(t);
+    public void updateTeam(long tId, Team newInfo) {
+        Team oldTeam = (Team) tr.findById(tId).orElse(null);
+        oldTeam = updateEach(newInfo, oldTeam);
+        tr.save(oldTeam);
     }
 
     //delete one team
