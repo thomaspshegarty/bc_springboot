@@ -2,6 +2,7 @@ package org.ms3.lcstracker.teams;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,13 +26,14 @@ public class TeamController {
     }
 
     @GetMapping()
-    public List<Team> getTeams(@RequestBody String region) {
-        return trs.getTeams(region);
+    public ResponseEntity<List<Team>> getTeams(@RequestBody String region) {
+        return new ResponseEntity<>(trs.getTeams(region),HttpStatus.OK);
     }
 
     @GetMapping("/{tId}")
-    public Team getTeam(@PathVariable Long tId) {
-        return trs.getTeam(tId);
+    public ResponseEntity<Team> getTeam(@PathVariable Long tId) {
+
+        return new ResponseEntity<>(trs.getTeam(tId), HttpStatus.OK);
     }
 
     @PutMapping("/{tId}")
