@@ -2,7 +2,6 @@ package org.ms3.lcstracker.players;
 
 import java.util.List;
 
-import org.ms3.lcstracker.teams.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +22,13 @@ public class PlayerController {
 	}
 
 	@GetMapping()
-	public ResponseEntity<List<Player>> getPlayers(@RequestBody String teamTag) {
-		return new ResponseEntity<List<Player>>(prs.getPlayers(teamTag),HttpStatus.OK);
+	public ResponseEntity getPlayers(@RequestBody String teamTag) {
+		List<Player> tRet = prs.getPlayers(teamTag);
+		if (tRet == null) {
+			return new ResponseEntity("Could not locate any players with that team tag.",HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity(prs.getPlayers(teamTag),HttpStatus.OK);
+		}
 	}
 	
 	@PostMapping()
@@ -34,8 +38,13 @@ public class PlayerController {
 	}
 	
 	@GetMapping("/{pId}")
-	public ResponseEntity<Player> getPlayer(@PathVariable long pId) {
-		return new ResponseEntity<>(prs.getPlayer(pId),HttpStatus.OK);
+	public ResponseEntity getPlayer(@PathVariable long pId) {
+		Player p1 = prs.getPlayer(pId);
+		if (p1 == null) {
+			return new ResponseEntity("Could not locate any players with that player ID", HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity(prs.getPlayer(pId), HttpStatus.OK);
+		}
 	}
 	
 	@PutMapping("/{pId}")

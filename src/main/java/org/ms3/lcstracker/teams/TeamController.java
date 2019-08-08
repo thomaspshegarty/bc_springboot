@@ -26,14 +26,24 @@ public class TeamController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Team>> getTeams(@RequestBody String region) {
-        return new ResponseEntity<>(trs.getTeams(region),HttpStatus.OK);
+    public ResponseEntity getTeams(@RequestBody String region) {
+        List<Team> tRet = trs.getTeams(region);
+        if (tRet == null) {
+            return new ResponseEntity("Could not find any team in the region",HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity(tRet,HttpStatus.OK);
+        }
+
     }
 
     @GetMapping("/{tId}")
     public ResponseEntity<Team> getTeam(@PathVariable Long tId) {
-
-        return new ResponseEntity<>(trs.getTeam(tId), HttpStatus.OK);
+        Team t1 = trs.getTeam(tId);
+        if (t1 == null) {
+            return new ResponseEntity("Could not find team of given id",HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity(t1,HttpStatus.OK);
+        }
     }
 
     @PutMapping("/{tId}")

@@ -1,5 +1,3 @@
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,8 +5,7 @@ import org.junit.runners.MethodSorters;
 import org.ms3.lcstracker.LcsTrackerAPI;
 import org.ms3.lcstracker.players.Player;
 import org.ms3.lcstracker.players.PlayerController;
-import org.ms3.lcstracker.teams.PlayerRepository;
-import org.ms3.lcstracker.teams.TeamController;
+import org.ms3.lcstracker.players.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -59,6 +56,29 @@ public class PlayerRepoTest {
         pc.updatePlayer(damonte.getId(),dingomonte);
 
         System.out.println(pc.getPlayers(""));
+    }
+
+    @Test
+    public void getNonexistentPlayer() throws Exception {
+
+        System.out.println(pc.getPlayer(200));
+
+    }
+
+    @Test
+    public void deletePlayer() throws Exception {
+
+        Player nisqy = new Player("Nisqy", "Cloud 9", "C9", "mid");
+        List<Player> toAdd = new ArrayList<>();
+        toAdd.add(nisqy);
+        pc.postPlayers(toAdd);
+
+        System.out.println(pc.getPlayers(""));
+
+        pc.deletePlayer(nisqy.getId());
+
+        System.out.println(pc.getPlayers(""));
+
     }
 
 }

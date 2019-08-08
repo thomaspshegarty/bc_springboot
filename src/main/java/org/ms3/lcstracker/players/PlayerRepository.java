@@ -1,6 +1,5 @@
-package org.ms3.lcstracker.teams;
+package org.ms3.lcstracker.players;
 
-import org.ms3.lcstracker.players.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

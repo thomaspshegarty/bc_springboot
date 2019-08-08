@@ -1,6 +1,5 @@
 package org.ms3.lcstracker.players;
 
-import org.ms3.lcstracker.teams.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +24,11 @@ public class PlayerRepoService {
 
     //post players
     public void postPlayers(List<Player> pArray) {
-        for (Player p: pArray) {
-            pr.save(p);
+        List<Player> checkP = pr.saveAll(pArray);
+        if (checkP.equals(pArray)) {
+            //then the addition was successful
+        } else {
+            //addition wasn't successful
         }
     }
 
