@@ -20,9 +20,8 @@ public class TeamController {
     }
 
     @PostMapping()
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void addTeams(@RequestBody List<Team> tArray) {
-        trs.addTeams(tArray);
+    public ResponseEntity addTeams(@RequestBody List<Team> tArray) {
+        return trs.addTeams(tArray);
     }
 
     @GetMapping()
@@ -47,9 +46,8 @@ public class TeamController {
     }
 
     @PutMapping("/{tId}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void updateTeam(@PathVariable Long tId, @RequestBody Team t) {
-        trs.updateTeam(tId,t);
+    public ResponseEntity updateTeam(@PathVariable Long tId, @RequestBody Team t) {
+        return trs.updateTeam(tId,t);
     }
 
     @DeleteMapping("/{tId}")

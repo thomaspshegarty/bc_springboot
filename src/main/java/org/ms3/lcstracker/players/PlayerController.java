@@ -32,9 +32,8 @@ public class PlayerController {
 	}
 	
 	@PostMapping()
-	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void postPlayers(@RequestBody List<Player> pArray) {
-		prs.postPlayers(pArray);
+	public ResponseEntity postPlayers(@RequestBody List<Player> pArray) {
+		return prs.postPlayers(pArray);
 	}
 	
 	@GetMapping("/{pId}")
@@ -48,9 +47,8 @@ public class PlayerController {
 	}
 	
 	@PutMapping("/{pId}")
-	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void updatePlayer(@PathVariable long pId, @RequestBody Player p) {
-		prs.updatePlayer(pId,p);
+	public ResponseEntity updatePlayer(@PathVariable long pId, @RequestBody Player p) {
+		return prs.updatePlayer(pId,p);
 	}
 	
 	@DeleteMapping("/{pId}")

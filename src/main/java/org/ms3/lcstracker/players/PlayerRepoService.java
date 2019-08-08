@@ -1,6 +1,8 @@
 package org.ms3.lcstracker.players;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,12 +25,12 @@ public class PlayerRepoService {
     }
 
     //post players
-    public void postPlayers(List<Player> pArray) {
+    public ResponseEntity postPlayers(List<Player> pArray) {
         List<Player> checkP = pr.saveAll(pArray);
         if (checkP.equals(pArray)) {
-            //then the addition was successful
+            return new ResponseEntity("Successfully added players", HttpStatus.ACCEPTED);
         } else {
-            //addition wasn't successful
+            return new ResponseEntity("Adding players failed", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -57,10 +59,15 @@ public class PlayerRepoService {
 
     }
 
-    public void updatePlayer(long pId, Player p){
+    public ResponseEntity updatePlayer(long pId, Player p){
         Player p1 = (Player) pr.findById(pId).orElse(null);
         p1 = updateEach(p,p1);
-        pr.save(p1);
+        Player testPlayer = pr.save(p1);
+        if (testPlayer.equals(p1)) {
+            return new ResponseEntity("Successfully updated player info", HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity("Failed to update player info", HttpStatus.BAD_REQUEST);
+        }
     }
 
     //delete one player

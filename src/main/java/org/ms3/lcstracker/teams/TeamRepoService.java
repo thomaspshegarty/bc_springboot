@@ -1,6 +1,8 @@
 package org.ms3.lcstracker.teams;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,9 +27,12 @@ public class TeamRepoService {
 
     //post teams
 
-    public void addTeams(List<Team> tArray) {
-        for (Team t: tArray) {
-            tr.save(t);
+    public ResponseEntity addTeams(List<Team> tArray) {
+        List<Team> retVal = tr.saveAll(tArray);
+        if (retVal.equals(tArray)) {
+            return new ResponseEntity("Successful DB modification",HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity("Unsuccessful DB modification",HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -58,10 +63,15 @@ public class TeamRepoService {
         return oldTeam;
     }
 
-    public void updateTeam(long tId, Team newInfo) {
+    public ResponseEntity updateTeam(long tId, Team newInfo) {
         Team oldTeam = (Team) tr.findById(tId).orElse(null);
         oldTeam = updateEach(newInfo, oldTeam);
-        tr.save(oldTeam);
+        Team checkTeam = tr.save(oldTeam);
+        if (checkTeam.equals(oldTeam)) {
+            return new ResponseEntity("Successful update of team info", HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity("Failed to update team info",HttpStatus.BAD_REQUEST);
+        }
     }
 
     //delete one team
