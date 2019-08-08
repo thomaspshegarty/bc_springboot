@@ -26,7 +26,7 @@ public class TeamController {
     }
 
     @GetMapping()
-    public ResponseEntity getTeams(@RequestBody String region) {
+    public ResponseEntity getTeams(@RequestParam("region") String region) {
         List<Team> tRet = trs.getTeams(region);
         if (tRet == null) {
             return new ResponseEntity("Could not find any team in the region",HttpStatus.NOT_FOUND);

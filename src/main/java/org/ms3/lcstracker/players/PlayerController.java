@@ -21,8 +21,8 @@ public class PlayerController {
 		return "Welcome to the players page.";
 	}
 
-	@GetMapping()
-	public ResponseEntity getPlayers(@RequestBody String teamTag) {
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity getPlayers(@RequestParam("tag") String teamTag) {
 		List<Player> tRet = prs.getPlayers(teamTag);
 		if (tRet == null) {
 			return new ResponseEntity("Could not locate any players with that team tag.",HttpStatus.NOT_FOUND);
