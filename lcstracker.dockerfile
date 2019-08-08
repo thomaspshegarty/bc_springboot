@@ -1,5 +1,6 @@
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
-ARG JAR_FILE=~/workspace/bc_springboot/target/lcstracker-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=./target/lcs-tracker-0.0.1-SNAPSHOT.jar
 COPY ${JAR_FILE} ./lcstracker.jar
-ENTRYPOINT ["java","-jar","/lcstracker.jar"]
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","./lcstracker.jar"]
