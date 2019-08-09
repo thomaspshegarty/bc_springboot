@@ -1,23 +1,23 @@
 version: '3'
 services:
-  sql-db:
-    container_name: sql_boot
-    image: mysql:latest
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: pass
-      MYSQL_DATABASE: lcstracker
-      MYSQL_USER: basic
-      MYSQL_PASSWORD: lowpass
+#  sql-db:
+#    container_name: sql_boot
+#    image: mysql:latest
+#    ports:
+#      - "3316:3306"
+#    environment:
+#      MYSQL_ROOT_PASSWORD: pass
+#      MYSQL_DATABASE: lcstracker
+#      MYSQL_USER: basic
+#      MYSQL_PASSWORD: lowpass
+
 
   lcstracker:
     container_name: lcstracker_boot
-    depends_on:
-      - sql-db
+#    depends_on:
+#      - sql-db
     build:
       context: .
       dockerfile: lcstracker.dockerfile
     ports:
       - "8080:8080"
-    restart: always

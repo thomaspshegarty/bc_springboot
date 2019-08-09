@@ -1,5 +1,5 @@
-FROM mysql
-
-ENV MYSQL_DATABASE lcstracker
-
-COPY ./sql-scripts/create_tables.sql /docker-entrypoint-initdb.d/10-init.sql
+FROM openjdk:8
+VOLUME /tmp
+ARG JAR_FILE=./target/lcs-tracker-0.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} ./lcstracker.jar
+ENTRYPOINT ["java","-jar","./lcstracker.jar"]
