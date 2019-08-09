@@ -1,8 +1,7 @@
 spring:
-  h2:
-    console:
-      enabled: true
   datasource:
-    url: jdbc:h2:mem:sample
+    url: jdbc:mysql://192.186.99.100:3306/lcstracker
     username: basic
     password: lowpass
+server:
+  port: 8080
