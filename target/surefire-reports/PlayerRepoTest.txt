@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: PlayerRepoTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.844 s - in PlayerRepoTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.551 s - in PlayerRepoTest
