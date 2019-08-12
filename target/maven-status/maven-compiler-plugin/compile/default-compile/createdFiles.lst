@@ -6,4 +6,5 @@ org\ms3\lcstracker\LcsTrackerAPI.class
 org\ms3\lcstracker\teams\Team.class
 org\ms3\lcstracker\players\PlayerController.class
 org\ms3\lcstracker\players\PlayerRepository.class
+org\ms3\lcstracker\security\WebSecurity.class
 org\ms3\lcstracker\players\PlayerRepoService.class
