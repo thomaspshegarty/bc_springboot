@@ -1,0 +1,9 @@
+org\ms3\lcstracker\teams\TeamController.class
+org\ms3\lcstracker\teams\TeamRepoService.class
+org\ms3\lcstracker\teams\TeamRepository.class
+org\ms3\lcstracker\players\Player.class
+org\ms3\lcstracker\LcsTrackerAPI.class
+org\ms3\lcstracker\teams\Team.class
+org\ms3\lcstracker\players\PlayerController.class
+org\ms3\lcstracker\players\PlayerRepository.class
+org\ms3\lcstracker\players\PlayerRepoService.class

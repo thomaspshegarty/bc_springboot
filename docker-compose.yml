@@ -14,8 +14,8 @@ services:
 
   lcstracker:
     container_name: lcstracker_boot
-    depends_on:
-      - sql-db
+#    depends_on:
+#      - sql-db
     build:
       context: .
       dockerfile: lcstracker.dockerfile
