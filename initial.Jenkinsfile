@@ -4,18 +4,15 @@ pipeline {
     stages {
         stage('Build') {
             steps{
+                echo 'Buiilding...'
                 bat 'mvn clean'
                 bat 'mvn package'
             }
         }
-        stage('Link') {
-            steps {
-                echo 'Linking...'
-            }
-        }
         stage('Deploy') {
             steps {
-                echo 'Deploying...'
+                echo 'Deplying...'
+                bat 'docker-compose up --build'
             }
         }
     }
