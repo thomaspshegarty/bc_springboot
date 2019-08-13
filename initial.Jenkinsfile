@@ -11,7 +11,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
-                bat 'docker build -t test_image . < sql.Dockerfile'
+                bat 'docker build -t test_image - < sql.Dockerfile'
             }
         }
         stage('Clean') {
