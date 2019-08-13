@@ -5,14 +5,20 @@ pipeline {
         stage('Build') {
             steps{
                 echo 'Buiilding...'
-                bat 'mvn clean'
                 bat 'mvn package'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deplying...'
+                echo 'Deploying...'
+                bat 'docker-machine start default'
                 bat 'docker-compose up --build'
+            }
+        }
+        stage('Clean') {
+            steps {
+                echo 'Cleaning... '
+                bat 'mvn clean'
             }
         }
     }
