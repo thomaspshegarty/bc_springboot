@@ -12,13 +12,13 @@ pipeline {
     stages {
         stage('Build') {
             steps{
-                echo 'Building...'
+                echo '==Building=='
                 bat 'mvn package'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying...'
+                echo '==Deploying=='
                 bat 'docker-machine env'
                 bat 'docker-compose down'
                 bat 'docker-compose up --build -d'
@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Clean') {
             steps {
-                echo 'Cleaning... '
+                echo '==Cleaning=='
                 bat 'mvn clean'
             }
         }
