@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Clean') {
             steps {
-                echo '==Cleaning=='
+                echo 'Cleaning'
                 bat 'mvn clean'
             }
         }
