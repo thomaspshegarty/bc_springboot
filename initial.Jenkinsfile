@@ -21,8 +21,6 @@ pipeline {
                 echo 'Deploying...'
                 bat 'docker-machine env'
                 bat 'docker-compose down'
-                bat 'docker rm sql_boot'
-                bat 'docker rm lcstracker_boot'
                 bat 'docker-compose up --build'
             }
         }
