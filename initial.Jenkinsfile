@@ -19,9 +19,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying'
-                bat 'C:/Users/thoma docker-machine env'
-                bat 'C:/Users/thoma docker-compose down'
-                bat 'C:/Users/thoma docker-compose up --build -d'
+                bat 'docker-compose down'
+                bat 'docker-compose up --build -d'
             }
         }
         stage('Clean') {
