@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     environment {
-        SET DOCKER_TLS_VERIFY='1'
-        SET DOCKER_HOST='tcp://192.168.99.100:2376'
-        SET DOCKER_CERT_PATH='C:/Users/thoma/.docker/machine/machines/default'
-        SET DOCKER_MACHINE_NAME='default'
-        SET COMPOSE_CONVERT_WINDOWS_PATHS='true'
+        DOCKER_TLS_VERIFY='1'
+        DOCKER_HOST='tcp://192.168.99.100:2376'
+        DOCKER_CERT_PATH='C:/Users/thoma/.docker/machine/machines/default'
+        DOCKER_MACHINE_NAME='default'
+        COMPOSE_CONVERT_WINDOWS_PATHS='true'
     }
 
     stages {
