@@ -21,7 +21,7 @@ pipeline {
                 echo 'Deploying...'
                 bat 'docker-machine env'
                 bat 'docker-compose down'
-                bat 'docker-compose up --build'
+                bat 'docker-compose up --build -d'
             }
         }
         stage('Clean') {
