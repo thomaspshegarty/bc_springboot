@@ -15,7 +15,7 @@ To run the code with an in-memory database for API testing, adjust the line in `
 
 to
 
-`spring.datasource.url= jdbc:mysql:memdb:lcstracker`
+`spring.datasource.url= jdbc:mysql:mem:lcstracker`
 
 then make the code and call
 
