@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_TLS_VERIFY='1'
-        DOCKER_HOST='tcp://192.168.99.102:2376'
+        DOCKER_HOST='tcp://192.168.99.100:2376'
         DOCKER_CERT_PATH='C:/Users/thoma/.docker/machine/machines/default'
         DOCKER_MACHINE_NAME='default'
         COMPOSE_CONVERT_WINDOWS_PATHS='true'
