@@ -19,8 +19,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying'
-                bat 'docker-machine start default'
-                bat 'docker-compose down'
                 bat 'docker-compose up --build -d'
             }
         }
