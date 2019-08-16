@@ -37,6 +37,7 @@ public class TeamController {
 
     @GetMapping("/{tId}")
     public ResponseEntity<Team> getTeam(@PathVariable Long tId) {
+
         Team t1 = trs.getTeam(tId);
         if (t1 == null) {
             return new ResponseEntity("Could not find team of given id",HttpStatus.NOT_FOUND);
@@ -51,9 +52,14 @@ public class TeamController {
     }
 
     @DeleteMapping("/{tId}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void deleteTeam(@PathVariable Long tId) {
-        trs.deleteTeam(tId);
+    public ResponseEntity deleteTeam(@PathVariable Long tId) {
+
+        try {
+            trs.deleteTeam(tId);
+            return new ResponseEntity("Team deleted",HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("No team with that ID",HttpStatus.NOT_FOUND);
+        }
     }
 
 }

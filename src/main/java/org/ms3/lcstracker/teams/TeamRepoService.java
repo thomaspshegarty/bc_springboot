@@ -64,13 +64,18 @@ public class TeamRepoService {
     }
 
     public ResponseEntity updateTeam(long tId, Team newInfo) {
-        Team oldTeam = (Team) tr.findById(tId).orElse(null);
-        oldTeam = updateEach(newInfo, oldTeam);
-        Team checkTeam = tr.save(oldTeam);
-        if (checkTeam.equals(oldTeam)) {
-            return new ResponseEntity("Successful update of team info", HttpStatus.ACCEPTED);
-        } else {
-            return new ResponseEntity("Failed to update team info",HttpStatus.BAD_REQUEST);
+        try {
+            Team oldTeam = (Team) tr.findById(tId).orElse(null);
+
+            oldTeam = updateEach(newInfo, oldTeam);
+            Team checkTeam = tr.save(oldTeam);
+            if (checkTeam.equals(oldTeam)) {
+                return new ResponseEntity("Successful update of team info", HttpStatus.ACCEPTED);
+            } else {
+                return new ResponseEntity("Failed to update team info", HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity("No team with that ID to update",HttpStatus.NOT_FOUND);
         }
     }
 
