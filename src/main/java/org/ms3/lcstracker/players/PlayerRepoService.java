@@ -60,14 +60,19 @@ public class PlayerRepoService {
     }
 
     public ResponseEntity updatePlayer(long pId, Player p){
-        Player p1 = (Player) pr.findById(pId).orElse(null);
-        p1 = updateEach(p,p1);
-        Player testPlayer = pr.save(p1);
-        if (testPlayer.equals(p1)) {
-            return new ResponseEntity("Successfully updated player info", HttpStatus.ACCEPTED);
-        } else {
-            return new ResponseEntity("Failed to update player info", HttpStatus.BAD_REQUEST);
+        try {
+            Player p1 = (Player) pr.findById(pId).orElse(null);
+            p1 = updateEach(p,p1);
+            Player testPlayer = pr.save(p1);
+            if (testPlayer.equals(p1)) {
+                return new ResponseEntity("Successfully updated player info", HttpStatus.ACCEPTED);
+            } else {
+                return new ResponseEntity("Failed to update player info", HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity("Player not in the database", HttpStatus.NOT_FOUND);
         }
+
     }
 
     //delete one player

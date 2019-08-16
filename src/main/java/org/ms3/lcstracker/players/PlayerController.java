@@ -52,9 +52,13 @@ public class PlayerController {
 	}
 	
 	@DeleteMapping("/{pId}")
-	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void deletePlayer(@PathVariable long pId) {
-		prs.deletePlayer(pId);
+	public ResponseEntity deletePlayer(@PathVariable long pId) {
+		try {
+			prs.deletePlayer(pId);
+			return new ResponseEntity("Deleted players with that ID", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity("No player with that ID",HttpStatus.NOT_FOUND);
+		}
 	}
 	
 

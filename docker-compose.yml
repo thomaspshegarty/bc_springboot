@@ -12,12 +12,12 @@ services:
       MYSQL_PASSWORD: lowpass
 
 
-  lcstracker:
-    container_name: lcstracker_boot
-    depends_on:
-      - sql-db
-    build:
-      context: .
-      dockerfile: lcstracker.dockerfile
-    ports:
-      - "8080:8080"
+#  lcstracker:
+#    container_name: lcstracker_boot
+#    depends_on:
+#      - sql-db
+#    build:
+#      context: .
+#      dockerfile: lcstracker.dockerfile
+#    ports:
+#      - "8080:8080"
